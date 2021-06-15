@@ -2,14 +2,18 @@
 
 shitty discord bot that doesn't work good
 
-# self-hosting
+## self-hosting
 
-clone this repo
-copy config.example.yml to config.yml
-fill in the blanks
+```
+git clone https://github.com/aleclol/trisha
+cd trisha
+python3.8 -m venv .venv
+source .venv/bin/activate
 pip install -r requirements.txt
+mv config.yaml.example config.yaml
 python3 bot/bot.py
+```
 
-# license
+## license
 
 apache 2.0
