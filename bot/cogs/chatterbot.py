@@ -23,10 +23,12 @@ class ChatterBot(commands.Cog):
         self.messages = {}
         self.train.start()
 
-    @tasks.loop(minutes=5)
+    @tasks.loop(minutes=15)
     async def train(self):
         """
         This trains the ChatterBot on the cached messages
+
+        This is quite resource intensive, so don't use this on underpowered systems.
         """
         local_messages = self.messages.copy()
         self.messages.clear()
