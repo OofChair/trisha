@@ -2,6 +2,7 @@ import discord
 from chatterbot import ChatBot
 from chatterbot.trainers import ListTrainer
 from discord.ext import commands, tasks
+from typing import List
 
 
 class ChatterBot(commands.Cog):
@@ -69,19 +70,47 @@ class ChatterBot(commands.Cog):
             await ctx.send(response)
 
     @commands.group()
-    async def chatterbot(self, ctx):
+    async def train(self, ctx):
+        """
+        Train the AI on previous messages.
+        """
         pass
 
-    @chatterbot.group()
+    @train.command()
+    async def server(self, ctx):
+        """
+        Train the AI on messages from your entire server.
+        """
+        pass
+
+    @train.command()
+    async def channel(self, ctx, channels: List[discord.TextChannel]):
+        """
+        Train the AI on messages from specific channels.
+        """
+        pass
+
+    @commands.group()
     async def optout(self, ctx):
+        """
+        Opt out you or your entire server's message
+        """
         pass
 
     @optout.command()
     async def me(self, ctx):
+        """
+        Opt out yourself from being used to train the AI.
+        """
         pass
 
     @optout.command()
     async def server(self, ctx):
+        """
+        Opt out your server from being used to train the AI.
+
+        Using the train command will bypass this.
+        """
         pass
 
     @commands.Cog.listener()
