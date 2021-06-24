@@ -1,10 +1,6 @@
 token: 
-status: porn | trisha invite
+status: porn
 invite: 
-colors:
-  error: 16738657
 cogs:
-  chatterbot:
-    enabled: true
-  utility:
-    enabled: true
+  - chatterbot
+  - utility
