@@ -16,7 +16,7 @@ class Bot(commands.AutoShardedBot):
             roles=False, everyone=False, users=True
             ) ,
             intents=intents,
-            command_prefix=["!"],
+            command_prefix=["trisha ", "trisha"],
             activity=discord.Activity(
                 name=self.config["status"], type=discord.ActivityType.watching
             ),
