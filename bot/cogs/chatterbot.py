@@ -22,11 +22,10 @@ class ChatterBot(commands.Cog):
         self.messages = {}
         self.train.start()
 
-    @tasks.loop(seconds=120)
+    @tasks.loop(minutes=5)
     async def train(self):
         """
         This trains the ChatterBot on the cached messages
-        It is also blocking and something that needs to be worked on in the future
         """
         local_messages = self.messages.copy()
         self.messages.clear()
@@ -68,6 +67,22 @@ class ChatterBot(commands.Cog):
             await ctx.send(response, reference=ctx.message)
         except discord.errors.HTTPException:
             await ctx.send(response)
+
+    @commands.group()
+    async def chatterbot(self, ctx):
+        pass
+
+    @chatterbot.group()
+    async def optout(self, ctx):
+        pass
+
+    @optout.command()
+    async def me(self, ctx):
+        pass
+
+    @optout.command()
+    async def server(self, ctx):
+        pass
 
     @commands.Cog.listener()
     async def on_message(self, message: discord.Message):

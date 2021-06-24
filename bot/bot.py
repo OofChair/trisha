@@ -8,14 +8,13 @@ class Bot(commands.AutoShardedBot):
     def __init__(self):
         with open("config.yaml") as file:
             self.config = yaml.load(file)
-        allowed_mentions = discord.AllowedMentions(
-            roles=False, everyone=False, users=True
-        )
         intents = discord.Intents.none()
         intents.messages = True
         intents.guilds = True
         super().__init__(
-            allowed_mentions=allowed_mentions,
+            allowed_mentions=discord.AllowedMentions(
+            roles=False, everyone=False, users=True
+            ) ,
             intents=intents,
             command_prefix=["!"],
             activity=discord.Activity(
@@ -32,16 +31,15 @@ class Bot(commands.AutoShardedBot):
         await self.wait_until_ready()
         cogs = self.config["cogs"]
         for cog in cogs:
-            if self.config["cogs"][cog]["enabled"] is True:
-                try:
-                    self.load_extension("cogs." + cog)
-                except Exception as error:
-                    print(f"Failed to load cog: {cog}\n{error}")
-                    continue
-                print(f"Loaded cog: {cog}")
+            try:
+                self.load_extension("cogs." + cog)
+            except Exception as error:
+                print(f"Failed to load cog: {cog}\n{error}")
+                continue
+            print(f"Loaded cog: {cog}")
 
     async def on_ready(self):
-        print(f"Connected to Discord as {self.user.name} ({self.user.id})")
+        print(f"Connected to Discord as {self.user} ({self.user.id})")
 
 DiscordBot = Bot()
 DiscordBot.run()

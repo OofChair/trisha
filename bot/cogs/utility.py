@@ -70,18 +70,5 @@ class Utility(commands.Cog):
         except discord.Forbidden:
             pass
 
-    @commands.command()
-    @commands.bot_has_permissions(send_messages=True)
-    async def reload(self, ctx, cog: str):
-        self.bot.unload_extension("cogs." + cog)
-        try:
-            self.bot.load_extension("cogs." + cog)
-        except Exception as error:
-            print(f"Cog {cog} failed to load.\n{error}")
-            await ctx.send(f"Cog {cog} failed to load.")
-            return
-        await ctx.send(f"Reloaded **{cog}**")
-
-
 def setup(bot):
     bot.add_cog(Utility(bot))
